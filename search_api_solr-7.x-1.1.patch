@@ -1,0 +1,21 @@
+diff --git a/includes/solr_connection.inc b/includes/solr_connection.inc
+index 8a26212..395f661 100644
+--- a/includes/solr_connection.inc
++++ b/includes/solr_connection.inc
+@@ -325,7 +325,15 @@ class SearchApiSolrConnection implements SearchApiSolrConnectionInterface {
+     // Second pass to populate the cache if necessary.
+     if (empty($this->system_info)) {
+       $url = $this->constructUrl(self::SYSTEM_SERVLET, array('wt' => 'json'));
+-      $response = $this->sendRawGet($url);
++      // Websolr protects the administrative area of the Solr server. Fake a
++      // response to indicate a successful connection.
++      // @see  https://github.com/omc/websolr-guides/blob/master/drupal7-searchapi.md#getting-started
++      if (preg_match(variable_get('websolr_base_url_pattern', '/websolr\.com/'), $this->getBaseUrl())) {
++        $response = (object) array('data' => '');
++      }
++      else {
++        $response = $this->sendRawGet($url);
++      }
+       $this->system_info = json_decode($response->data);
+       if ($cid) {
+         cache_set($cid, $response->data, 'cache_search_api_solr');
