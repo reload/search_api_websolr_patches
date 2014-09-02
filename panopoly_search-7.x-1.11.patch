@@ -1,0 +1,13 @@
+diff --git a/panopoly_search.make b/panopoly_search.make
+index c167a9a..62b1d03 100644
+--- a/panopoly_search.make
++++ b/panopoly_search.make
+@@ -13,6 +13,8 @@
+ 
+ projects[search_api_solr][version] = 1.1
+ projects[search_api_solr][subdir] = contrib
++;; Websolr protects the administrative area of the Solr server.
++projects[search_api_solr][patch][] = https://raw.githubusercontent.com/reload/search_api_websolr_patches/a1e911bb959dc8f8681db7cd6fab67d26d654b37/search_api_solr-7.x-1.1.patch
+ 
+ projects[search_api_db][version] = 1.0-rc2
+ projects[search_api_db][subdir] = contrib
