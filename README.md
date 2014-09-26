@@ -7,6 +7,10 @@ response to indicate a successful connection.
 
 See https://github.com/omc/websolr-guides/blob/master/drupal7-searchapi.md#getting-started.
 
+Search API Solr 1.6 has a build configuration workaround for this problem.
+
+See https://www.drupal.org/node/2175829 - the patch from the issue should also apply on version 1.4.
+
 ## panopoly_search-7.x-1.11.patch
 
 Patch Panopoly Searchs make file to include the
